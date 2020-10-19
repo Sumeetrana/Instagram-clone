@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav>
-      <div class="nav-wrapper white">
-        <Link to="/" class="brand-logo left">
-          Logo
+      <div className="nav-wrapper white">
+        <Link to="/" className="brand-logo left">
+          Instagram
         </Link>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right">
           <li>
-            <Link to="/signin">Singin</Link>
+            <Link to="/signin">Signin</Link>
           </li>
           <li>
             <Link to="/signup">Singup</Link>
