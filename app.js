@@ -11,10 +11,8 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (e) => {
   console.log("Error connecting DB", e);
 });
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use(express.json());
+app.use(require("./routes/auth"));
 
 app.listen(PORT, () => {
   console.log("Server running");
