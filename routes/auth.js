@@ -2,8 +2,11 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../keys");
+const requireLogin = require("../middleware/requireLogin");
 
-router.get("/", (req, res) => {
+router.get("/protected", requireLogin, (req, res) => {
   res.send("hello");
 });
 
@@ -44,7 +47,9 @@ router.post("/signin", async (req, res) => {
     if (!isPasswordMatch) {
       return res.status(422).json({ error: "Invalid password" });
     }
-    res.json({ message: "Successfully signed in" });
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET);
+
+    res.json({ token });
   } catch (error) {
     console.log("Error: ", error);
   }
