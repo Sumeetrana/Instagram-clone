@@ -13,6 +13,7 @@ mongoose.connection.on("error", (e) => {
 });
 app.use(express.json());
 app.use(require("./routes/auth"));
+app.use(require("./routes/post"));
 
 app.listen(PORT, () => {
   console.log("Server running");
