@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
 
+body {
+  box-sizing: border-box;
+}
+
 a {
   color: black !important;
 }
@@ -25,4 +29,15 @@ a {
 .input-field input:focus {
   border-bottom: 1px solid#64b5f6 !important;
   box-shadow: 0 1px 0 0#64b5f6 !important;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.item {
+  width: 32%;
+  margin: 7.5px 0;
 }
