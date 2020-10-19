@@ -31,4 +31,15 @@ router.post("/createpost", requireLogin, async (req, res) => {
   }
 });
 
+router.get("/myposts", requireLogin, async (req, res) => {
+  try {
+    const myposts = await Post.find({ postedBy: req.user._id }).populate(
+      "postedBy",
+      "_id name"
+    );
+    res.json({ myposts });
+  } catch (e) {
+    console.log("Error: ", e);
+  }
+});
 module.exports = router;
