@@ -3,7 +3,7 @@ const router = express.Router();
 const Post = require("../models/post");
 const requireLogin = require("../middleware/requireLogin");
 
-router.get("/allposts", async (req, res) => {
+router.get("/allposts", requireLogin, async (req, res) => {
   try {
     const posts = await Post.find().populate("postedBy", "_id name");
     res.json({ posts });
