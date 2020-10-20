@@ -12,24 +12,26 @@ router.get("/protected", requireLogin, (req, res) => {
 
 router.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
+  console.log(req.body);
   if (!name || !email || !password) {
     return res.status(422).json({ error: "Please fill all the fields" });
   }
   const user = await User.findOne({ email });
   if (user) {
     return res.status(422).json({ error: "User already exists" });
-  }
-  const hashedPassword = await bcrypt.hash(password, 12);
-  try {
-    const newUser = new User({
-      email,
-      name,
-      password: hashedPassword,
-    });
-    await newUser.save();
-    res.json({ message: "Saved succesfully" });
-  } catch (e) {
-    console.log("Error: ", e);
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 12);
+    try {
+      const newUser = new User({
+        email,
+        name,
+        password: hashedPassword,
+      });
+      await newUser.save();
+      res.json({ message: "Saved succesfully" });
+    } catch (e) {
+      console.log("Error: ", e);
+    }
   }
 });
 
@@ -49,7 +51,10 @@ router.post("/signin", async (req, res) => {
     }
     const token = jwt.sign({ _id: user._id }, JWT_SECRET);
 
-    res.json({ token });
+    res.json({
+      token,
+      user: { _id: user._id, name: user.name, email: user.email },
+    });
   } catch (error) {
     console.log("Error: ", error);
   }

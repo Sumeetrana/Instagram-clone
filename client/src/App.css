@@ -51,4 +51,5 @@ a {
 #toast-container {
   right: 20px !important;
   left: auto !important;
+  top: 30px !important;
 }
