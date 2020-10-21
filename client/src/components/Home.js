@@ -62,6 +62,32 @@ const Home = () => {
       .catch((e) => console.log(e));
   };
 
+  const makeComment = (text, postId) => {
+    fetch("/comment", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId,
+        text,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((item) => {
+          if (item._id == result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
     <div className="home">
       {data.map((item) => {
@@ -98,7 +124,48 @@ const Home = () => {
                 </span>
                 <span>{item.body}</span>
               </div>
-              <input type="text" placeholder="Leave comment.." />
+              <div>
+                {item.comments.map((comment) => {
+                  return (
+                    <h6 key={comment._id}>
+                      <span style={{ fontWeight: 500 }}>
+                        {comment.postedBy.name}
+                      </span>
+                      &nbsp;&nbsp;
+                      {comment.text}
+                    </h6>
+                  );
+                })}
+              </div>
+              <div style={{ display: "flex" }}>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (e.target[0].value !== "") {
+                      makeComment(e.target[0].value, item._id);
+                      e.target[0].value = "";
+                    }
+                  }}
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                  }}
+                >
+                  <input type="text" placeholder="Leave comment.." />
+                  <button
+                    type="submit"
+                    style={{
+                      background: "white",
+                      border: "none",
+                      color: "#4AB5F9",
+                      fontWeight: "500",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Post
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         );

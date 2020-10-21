@@ -5,7 +5,9 @@ const requireLogin = require("../middleware/requireLogin");
 
 router.get("/allposts", requireLogin, async (req, res) => {
   try {
-    const posts = await Post.find().populate("postedBy", "_id name");
+    const posts = await Post.find()
+      .populate("postedBy", "_id name")
+      .populate("comments.postedBy", "_id name");
     res.json({ posts });
   } catch (e) {
     console.log("Error: ", e);
@@ -74,7 +76,7 @@ router.put("/unlike", requireLogin, (req, res) => {
     });
 });
 
-router.put("/comment", (req, res) => {
+router.put("/comment", requireLogin, (req, res) => {
   const comment = {
     text: req.body.text,
     postedBy: req.user._id,
