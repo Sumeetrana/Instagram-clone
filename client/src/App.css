@@ -53,3 +53,7 @@ a {
   left: auto !important;
   top: 30px !important;
 }
+
+.logoutButton {
+  margin: 0 5px 5px 5px;
+}

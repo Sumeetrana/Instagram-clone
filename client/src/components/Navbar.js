@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../App";
 
 const Navbar = () => {
-  const { state } = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
+  const history = useHistory();
   const renderLists = () => {
     if (state) {
       return [
@@ -12,6 +13,18 @@ const Navbar = () => {
         </li>,
         <li>
           <Link to="/create">Create</Link>
+        </li>,
+        <li>
+          <button
+            class="btn btn-small waves-effect waves-light logoutButton"
+            onClick={() => {
+              localStorage.clear();
+              dispatch({ type: "CLEAR" });
+              history.push("/signin");
+            }}
+          >
+            Logout
+          </button>
         </li>,
       ];
     } else {
