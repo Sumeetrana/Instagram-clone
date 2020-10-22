@@ -3,7 +3,9 @@ const router = express.Router();
 const User = require("../models/user");
 const Post = require("../models/post");
 
-router.get("/user/:id", (req, res) => {
+const requireLogin = require("../middleware/requireLogin");
+
+router.get("/user/:id", requireLogin, (req, res) => {
   User.findOne({ _id: req.params.id })
     .select("-password")
     .then((user) => {

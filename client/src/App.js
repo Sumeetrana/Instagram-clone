@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import CreatePost from "./components/CreatePost";
+import User from "./components/User";
 import { reducer, intialState } from "./reducers/reducer";
 
 export const UserContext = createContext();
@@ -26,8 +27,9 @@ const Routing = () => {
     <Switch>
       <Route path="/signin" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/profile" component={Profile} />
       <Route path="/create" component={CreatePost} />
+      <Route path="/profile/:userid" component={User} />
+      <Route path="/profile" component={Profile} />
       <Route path="/" component={Home} />
     </Switch>
   );
