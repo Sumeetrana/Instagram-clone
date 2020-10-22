@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../App";
 
 const Profile = () => {
   const [data, setData] = useState([]);
+  const { state } = useContext(UserContext);
   useEffect(() => {
     fetch("/allposts", {
       headers: {
@@ -11,6 +13,7 @@ const Profile = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result.posts);
+        console.log(state);
         setData(result.posts);
       });
   }, []);
@@ -35,7 +38,7 @@ const Profile = () => {
           />
         </div>
         <div style={{ textAlign: "left" }}>
-          <h4>Katy Perry</h4>
+          <h4>Katy pery</h4>
           <div
             style={{
               display: "flex",
@@ -44,13 +47,13 @@ const Profile = () => {
             }}
           >
             <h6>
-              <b>40</b> posts
+              <b>{data.length}</b> posts
             </h6>
             <h6>
-              <b>40</b> followers
+              <b>{state ? state.followers.length : "0"}</b> followers
             </h6>
             <h6>
-              <b>40</b> following
+              <b>{state ? state.following.length : "0"}</b> following
             </h6>
           </div>
         </div>
