@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../keys");
+const { JWT_SECRET } = require("../config/keys");
 const requireLogin = require("../middleware/requireLogin");
 
 router.get("/protected", requireLogin, (req, res) => {
