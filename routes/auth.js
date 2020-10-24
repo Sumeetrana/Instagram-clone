@@ -11,7 +11,7 @@ router.get("/protected", requireLogin, (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, pic } = req.body;
   console.log(req.body);
   if (!name || !email || !password) {
     return res.status(422).json({ error: "Please fill all the fields" });
@@ -26,6 +26,7 @@ router.post("/signup", async (req, res) => {
         email,
         name,
         password: hashedPassword,
+        pic,
       });
       await newUser.save();
       res.json({ message: "Saved succesfully" });
@@ -53,7 +54,14 @@ router.post("/signin", async (req, res) => {
 
     res.json({
       token,
-      user: { _id: user._id, name: user.name, email: user.email },
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        followers: user.followers,
+        following: user.following,
+        pic: user.pic,
+      },
     });
   } catch (error) {
     console.log("Error: ", error);

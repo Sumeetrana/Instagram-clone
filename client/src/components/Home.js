@@ -14,7 +14,7 @@ const Home = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result.posts);
+        console.log(result);
         setData(result.posts);
       });
   }, []);
@@ -120,8 +120,23 @@ const Home = () => {
                     ? "/profile"
                     : `/profile/${item.postedBy._id}`
                 }
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
               >
-                {item.postedBy.name}
+                <img
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 40,
+                    alignItems: "center",
+                    margin: "10px 10px 0 10px",
+                  }}
+                  src={item.postedBy.pic}
+                />
+                <div style={{ marginTop: 8 }}>{item.postedBy.name}</div>
               </Link>{" "}
               {item.postedBy._id === state._id ? (
                 <i

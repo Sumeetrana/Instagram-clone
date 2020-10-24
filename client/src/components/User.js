@@ -105,7 +105,7 @@ const Profile = () => {
               borderRadius: "80px",
               objectFit: "cover",
             }}
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+            src={data.user ? data.user.pic : "loading"}
           />
         </div>
         <div style={{ textAlign: "left" }}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
 
@@ -8,10 +8,29 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(undefined);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (url) {
+      uploadFields();
+    }
+  }, [url]);
+
+  const uploadPic = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "insta-clone");
+    data.append("cloud_name", "dwhrleiox");
+    fetch("https://api.cloudinary.com/v1_1/dwhrleiox/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => setUrl(data.url))
+      .catch((e) => console.log(e));
+  };
+
+  const uploadFields = () => {
     fetch("/signup", {
       method: "post",
       headers: {
@@ -21,6 +40,7 @@ const Signup = () => {
         name,
         password,
         email,
+        pic: url,
       }),
     })
       .then((res) => res.json())
@@ -34,6 +54,15 @@ const Signup = () => {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (image) {
+      uploadPic();
+    } else {
+      uploadFields();
+    }
   };
 
   return (

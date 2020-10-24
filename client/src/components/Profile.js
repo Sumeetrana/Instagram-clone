@@ -34,11 +34,11 @@ const Profile = () => {
               borderRadius: "80px",
               objectFit: "cover",
             }}
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+            src={state ? state.pic : "loading.."}
           />
         </div>
         <div style={{ textAlign: "left" }}>
-          <h4>Katy pery</h4>
+          <h4>{state && state.name}</h4>
           <div
             style={{
               display: "flex",
