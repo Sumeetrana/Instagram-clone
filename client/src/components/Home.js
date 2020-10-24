@@ -118,6 +118,7 @@ const Home = () => {
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "row",
+                alignContent: "space-between",
               }}
             >
               <Link

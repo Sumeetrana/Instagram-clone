@@ -87,7 +87,7 @@ const CreatePost = () => {
         </div>
       </div>
       <button
-        className="btn btn-large waves-effect waves-light #64b5f6 blue darken-2"
+        className="btn btn-large waves-effect waves-light"
         style={{ marginTop: "60px" }}
         onClick={uploadPhoto}
       >

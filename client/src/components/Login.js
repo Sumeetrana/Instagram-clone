@@ -56,10 +56,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button
-            type="submit"
-            className="btn waves-effect waves-light #64b5f6 blue lighten-2"
-          >
+          <button type="submit" className="btn waves-effect waves-light">
             Log In
           </button>
         </form>

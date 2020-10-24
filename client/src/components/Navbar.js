@@ -41,10 +41,14 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-wrapper white">
-        <Link to={state ? "/" : "/signin"} className="brand-logo left">
+        <Link
+          to={state ? "/" : "/signin"}
+          className="brand-logo left"
+          style={{ paddingLeft: "15px" }}
+        >
           Instagram
         </Link>
-        <ul id="nav-mobile" className="right">
+        <ul id="nav-mobile" className="right" style={{ paddingRight: "15px" }}>
           {renderLists()}
         </ul>
       </div>
