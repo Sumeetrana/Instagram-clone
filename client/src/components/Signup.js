@@ -7,6 +7,8 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,6 +59,18 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <div className="file-field input-field">
+            <div className="btn btn-small #64b5f6 blue lighten-1">
+              <span>Upload Profile Pic</span>
+              <input
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+            <div className="file-path-wrapper">
+              <input className="file-path validate" type="text" />
+            </div>
+          </div>
           <button
             type="submit"
             className="btn waves-effect waves-light #64b5f6 blue lighten-2"
